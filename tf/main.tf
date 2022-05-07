@@ -114,7 +114,7 @@ resource "google_eventarc_trigger" "trigger-audit" {
   }
   destination {
     cloud_run_service {
-      service = "pubsub-slack-dev"
+      service = "audit-slack-dev"
       region  = var.region
     }
   }
