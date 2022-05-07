@@ -28,7 +28,7 @@ module.exports.postMessage = (text, blocks, attachments) => {
     attachments,
     channel
   })
-  result.finally(() => console.log(result))
+  result.finally(() => console.log(JSON.stringify(result)))
 }
 
 module.exports.messageObjectComposer = (...middlewares) => {
