@@ -4,15 +4,22 @@
     "description": "",
     "main": "app.js",
     "scripts": {
-      "start": "node index"
+        "start": "node index"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-      "@slack/web-api": "^6.7.1",
-      "dayjs": "^1.11.1",
-      "express": "^4.18.1"
+        "@slack/web-api": "^6.7.1",
+        "dayjs": "^1.11.1",
+        "express": "^4.18.1"
+    },
+    "devDependencies": {
+        "@eslint/create-config": "^0.2.0",
+        "eslint": "^8.15.0",
+        "eslint-config-standard": "^17.0.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-n": "^15.2.0",
+        "eslint-plugin-promise": "^6.0.0"
     }
-  }
-  
+}
