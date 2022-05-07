@@ -26,3 +26,13 @@ variable "resource_name_prefix" {
   type        = string
   default     = "audit-slack"
 }
+
+variable "slack_token" {
+  description = "Slack token"
+  type        = string
+}
+
+variable "slack_channel" {
+  description = "Slack channel"
+  type        = string
+}
