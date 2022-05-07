@@ -27,8 +27,9 @@ composer.use(middleware.setFooter(dayjs().format("YYYY-MM-DDThh:mm:ssZ")));
 app.post('/', (req, res) => {
   res.status(204).send();
 
-  console.log(req.body)
+
   const rawMessage = JSON.parse(req.body);
+  console.log(rawMessage)
 
   let attachments = []
   composer.compose(rawMessage, attachments);
