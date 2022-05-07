@@ -22,11 +22,13 @@ if (slackChannel == null) {
 slack.initClient(slackToken, slackChannel)
 
 const composer = slack.messageObjectComposer(middleware.setHeader('#00ff00', 'audit'))
-composer.use(middleware.addField('authenticationInfo'))
-composer.use(middleware.addField('severity'))
-composer.use(middleware.addField('methodName'))
-composer.use(middleware.addField('resource'))
-composer.use(middleware.addField('receiveTimestamp'))
+composer.use(middleware.addField('Caller', 'authenticationInfo.principalEmail'))
+composer.use(middleware.addField('Severity', 'severity'))
+composer.use(middleware.addField('Event', 'protoPayload.methodName'))
+composer.use(middleware.addField('Service', 'protoPayload.serviceName'))
+composer.use(middleware.addField('Project', 'resource.labels.project_id'))
+composer.use(middleware.addField('Location', 'resource.labels.location'))
+composer.use(middleware.addField('Timestamp', 'timestamp'))
 composer.use(middleware.setFooter(dayjs().format('YYYY-MM-DDThh:mm:ssZ')))
 
 app.post('/', (req, res) => {

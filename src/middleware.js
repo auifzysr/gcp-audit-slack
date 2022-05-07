@@ -7,6 +7,14 @@ const isTailSectionFull = (_messageObject) => {
   return tailObject.type !== 'section' || tailObject.fields.length > 1
 }
 
+const traverse = (target, path) => {
+  console.log(`target, path = ${target}, ${path}`)
+  if (path.length === 0) {
+    return target
+  }
+  return traverse(target[path.shift()], path)
+}
+
 module.exports.setHeader = (color, headerText) => (rawData, _messageObject, next) => {
   _messageObject.push({
     color,
@@ -21,21 +29,23 @@ module.exports.setHeader = (color, headerText) => (rawData, _messageObject, next
   next()
 }
 
-module.exports.addField = (fieldName) => (rawData, _messageObject, next) => {
+module.exports.addField = (fieldName, jsonPath) => (rawData, _messageObject, next) => {
+  const value = traverse(JSON.parse(rawData), jsonPath.split('.'))
+
   if (isTailSectionFull(_messageObject)) {
     _messageObject[0].blocks.push({
       type: 'section',
       fields: [
         {
           type: 'mrkdwn',
-          text: `*${fieldName}:*\n${JSON.stringify(rawData[fieldName])}`
+          text: `*${fieldName}:*\n${value}`
         }
       ]
     })
   } else {
     _messageObject[0].blocks[_messageObject[0].blocks.length - 1].fields.push({
       type: 'mrkdwn',
-      text: `*${fieldName}:*\n${JSON.stringify(rawData[fieldName])}`
+      text: `*${fieldName}:*\n${value}`
     })
   }
   next()
