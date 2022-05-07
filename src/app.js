@@ -1,5 +1,4 @@
 const express = require('express')
-const dayjs = require('dayjs')
 
 const slack = require('./slack')
 const middleware = require('./middleware')
