@@ -21,7 +21,7 @@ if (slackChannel == null) {
 
 slack.initClient(slackToken, slackChannel)
 
-const composer = slack.messageObjectComposer(middleware.setHeader('#00ff00', 'audit'))
+const composer = middleware.messageObjectComposer(middleware.setHeader('#00ff00', 'audit'))
 composer.use(middleware.addField('Caller', 'protoPayload.authenticationInfo.principalEmail'))
 composer.use(middleware.addField('Severity', 'severity'))
 composer.use(middleware.addField('Event', 'protoPayload.methodName'))
