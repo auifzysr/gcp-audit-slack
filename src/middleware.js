@@ -8,7 +8,6 @@ const isTailSectionFull = (_messageObject) => {
 }
 
 const traverse = (target, path) => {
-  console.log(`target, path = ${target}, ${path}`)
   if (path.length === 0) {
     return target
   }
