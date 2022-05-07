@@ -52,11 +52,19 @@ resource "google_eventarc_trigger" "trigger-audit" {
 
   matching_criteria {
     attribute = "type"
-    value     = "google.cloud.pubsub.topic.v1.messagePublished"
+    value     = "google.cloud.audit.log.v1.written"
+  }
+  matching_criteria {
+    attribute = "serviceName"
+    value     = "storage.googleapis.com"
+  }
+  matching_criteria {
+    attribute = "methodName"
+    value     = "storage.buckets.list"
   }
   destination {
     cloud_run_service {
-      service = "pubsub-slack"
+      service = "pubsub-slack-dev"
       region  = var.region
     }
   }
