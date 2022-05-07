@@ -1,0 +1,27 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+  - 'build'
+  - '-t'
+  - 'gcr.io/$PROJECT_ID/pubsub-slack-$BRANCH_NAME:$COMMIT_SHA'
+  - '.'
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+  - 'push'
+  - 'gcr.io/$PROJECT_ID/pubsub-slack-$BRANCH_NAME:$COMMIT_SHA'
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args:
+  - 'run'
+  - 'deploy'
+  - 'pubsub-slack-$BRANCH_NAME'
+  - '--image'
+  - 'gcr.io/$PROJECT_ID/pubsub-slack-$BRANCH_NAME:$COMMIT_SHA'
+  - '--region'
+  - 'asia-northeast1'
+  - '--set-env-vars'
+  - 'SLACK_TOKEN=$_SLACK_TOKEN'
+  - '--set-env-vars'
+  - 'SLACK_CHANNEL=$_SLACK_CHANNEL'
+images:
+- 'gcr.io/$PROJECT_ID/pubsub-slack-$BRANCH_NAME:$COMMIT_SHA'
