@@ -21,16 +21,18 @@ if (slackChannel == null) {
 
 slack.initClient(slackToken, slackChannel);
 
-const composer = slack.messageObjectComposer(middleware.setHeader("#ff0000", "some header"));
+const composer = slack.messageObjectComposer(middleware.setHeader("#00ff00", "audit"));
+composer.use(middleware.addField("authenticationInfo"));
+composer.use(middleware.addField("severity"));
+composer.use(middleware.addField("methodName"));
+composer.use(middleware.addField("resource"));
+composer.use(middleware.addField("receiveTimestamp"));
 composer.use(middleware.setFooter(dayjs().format("YYYY-MM-DDThh:mm:ssZ")));
 
 app.post('/', (req, res) => {
   res.status(204).send();
 
-
-  const rawMessage = JSON.parse(req.body);
-  console.log(rawMessage)
-
+  const rawMessage = JSON.parse(JSON.stringify(req.body));
   let attachments = []
   composer.compose(rawMessage, attachments);
   slack.postMessage(null, null, attachments);
