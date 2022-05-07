@@ -1,0 +1,18 @@
+{
+    "name": "gcp-pubsub-slack",
+    "version": "0.0.1",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+      "start": "node index"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "@slack/web-api": "^6.7.1",
+      "dayjs": "^1.11.1",
+      "express": "^4.18.1"
+    }
+  }
+  
