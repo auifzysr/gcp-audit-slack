@@ -30,7 +30,7 @@ module.exports.setHeader = (color, headerText) => (rawData, _messageObject, next
 }
 
 module.exports.addField = (fieldName, jsonPath) => (rawData, _messageObject, next) => {
-  const value = traverse(JSON.parse(rawData), jsonPath.split('.'))
+  const value = traverse(rawData, jsonPath.split('.'))
 
   if (isTailSectionFull(_messageObject)) {
     _messageObject[0].blocks.push({
