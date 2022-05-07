@@ -94,5 +94,5 @@ const setFooter = (footerText) => (rawData, _messageObject, next) => {
 module.exports.setFooter = setFooter
 
 module.exports.setFooterCurrentTime = () => (rawData, _messageObject, next) => {
-  return this.setFooter(dayjs().format('YYYY-MM-DDThh:mm:ssZ'))
+  return setFooter(dayjs().format('YYYY-MM-DDThh:mm:ssZ'))
 }
