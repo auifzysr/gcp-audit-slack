@@ -29,7 +29,7 @@ composer.use(middleware.addField('Service', 'protoPayload.serviceName'))
 composer.use(middleware.addField('Project', 'resource.labels.project_id'))
 composer.use(middleware.addField('Location', 'resource.labels.location'))
 composer.use(middleware.addField('Timestamp', 'timestamp'))
-composer.use(middleware.setFooter(dayjs().format('YYYY-MM-DDThh:mm:ssZ')))
+composer.use(middleware.setFooterCurrentTime())
 
 app.post('/', (req, res) => {
   res.status(204).send()
