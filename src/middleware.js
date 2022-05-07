@@ -94,5 +94,11 @@ const setFooter = (footerText) => (rawData, _messageObject, next) => {
 module.exports.setFooter = setFooter
 
 module.exports.setFooterCurrentTime = () => (rawData, _messageObject, next) => {
-  return setFooter(dayjs().format('YYYY-MM-DDThh:mm:ssZ'))
+  _messageObject[0].blocks.push({
+    type: 'context',
+    elements: [{
+      type: 'mrkdwn',
+      text: dayjs().format('YYYY-MM-DDThh:mm:ssZ')
+    }]
+  })
 }
